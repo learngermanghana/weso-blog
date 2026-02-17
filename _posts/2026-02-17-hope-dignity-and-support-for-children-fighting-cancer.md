@@ -5,7 +5,7 @@ date: 2026-02-17
 tags: [wesoamo, childhood cancer, awareness, charity, ghana]
 categories: [Community]
 excerpt: "Every child fighting cancer deserves hope, dignity, and support. Wesoamo Child Cancer Foundation stands with children and their families through awareness, welfare, and counselling."
-image: https://raw.githubusercontent.com/learngermanghana/weso-blog/main/photos/photo
+image: https://raw.githubusercontent.com/learngermanghana/weso-blog/main/photos/1.jpg
 ---
 
 ## A Child’s Fight Should Not Be Faced Alone
@@ -89,7 +89,7 @@ You can make a difference today.
 - **Partner with us**
 
 📞 Call or WhatsApp: **0555945515**  
-🌐 Learn more or support a child: [Visit Wesoamo Child Cancer Foundation](https://www.wesoamochildcancer.com/)
+🌐 Learn more or support a child: https://www.wesoamochildcancer.com/
 
 ## Final Thoughts
 
