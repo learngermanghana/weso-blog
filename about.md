@@ -4,39 +4,29 @@ title: About
 permalink: /about/
 ---
 
-# About the Falowen Blog
+# About Wesoamo Child Cancer Foundation
 
-<img src="https://i.imgur.com/peGxlkO.png" alt="About Falowen" class="post-img">
+Wesoamo Child Cancer Foundation is a charity blog dedicated to **hope, dignity, and support for children fighting cancer**.
 
-The **Falowen Blog** is where we share stories, tips, and updates from **Learn Language Education Academy** and the **Falowen app**.
-
-
-Our goal is simple:  
-- Help learners prepare for **Goethe exams** (A1–C1) with practical advice  
-- Share **vocabulary, grammar, and speaking strategies** that make daily practice easier  
-- Keep you updated on **new features** and **success stories** from our students  
+We create awareness on childhood cancer and provide **financial, welfare, counselling, and follow-up support** for children battling cancer and their families in Ghana.
 
 ---
 
-## Who We Are
+## Contact & Support
 
-Falowen is built by teachers who understand the challenges of learning German.  
-From classrooms in **Accra, Ghana** to learners around the globe, we combine teaching experience with modern technology to make language learning accessible and effective.  
-
----
-
-## What You’ll Find Here
-
-- **Study Tips and Hacks** → Learn smarter, not harder  
-- **Exam Preparation** → Guidance for Goethe A1–C1  
-- **Vocabulary Routines** → Build daily learning habits  
-- **Falowen Updates** → New features, success stories, and behind the scenes  
+- **Donate**
+- **Volunteer**
+- **Call / WhatsApp:** [0555945515](https://wa.me/233555945515)
 
 ---
 
-## Join the Journey
+## Focus
 
-Language learning is more than exams — it is about confidence, culture, and connection.  
+Awareness • Welfare • Counselling
 
-Visit [falowen.app](https://falowen.app) to try the app.  
-Follow us on **Facebook, LinkedIn, and Instagram** for daily learning tips.
+## Get involved
+
+Donate • Volunteer • Partner
+
+
+Visit our main website: [www.wesoamochildcancer.com](https://www.wesoamochildcancer.com/).
