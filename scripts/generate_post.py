@@ -1,24 +1,15 @@
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, date
+from datetime import date, datetime
 from pathlib import Path
 import re
 
 POSTS_DIR = Path("_posts")
 
-GERMAN_CHAR_MAP = {
-    "ä": "ae",
-    "ö": "oe",
-    "ü": "ue",
-    "ß": "ss",
-}
-
 
 def slugify(text: str) -> str:
     text = text.strip().lower()
-    for src, target in GERMAN_CHAR_MAP.items():
-        text = text.replace(src, target)
     text = re.sub(r"[^a-z0-9\s-]", "", text)
     text = re.sub(r"\s+", "-", text)
     text = re.sub(r"-+", "-", text)
@@ -64,9 +55,8 @@ def build_structured_body(
     intro_heading: str,
     intro_lines: list[str],
     sections: list[dict],
-    comparison_rows: list[tuple[str, str, str, str]],
-    mistakes: list[tuple[str, str]],
-    practice_items: list[str],
+    quick_points: list[str],
+    action_items: list[str],
     final_lines: list[str],
 ) -> str:
     lines = [f"## {intro_heading}"]
@@ -81,325 +71,253 @@ def build_structured_body(
         lines.append("")
         lines.append("**Examples**")
         for example in section["examples"]:
-            lines.append(f"- *{example}*")
-        lines.append("")
-        lines.append(f"**Tone:** {section['tone']}")
-        lines.append(f"**Use it when:** {section['usage']}")
-        if section.get("warning"):
-            lines.append("")
-            lines.append("**Be careful:**")
-            lines.extend(section["warning"])
+            lines.append(f"- {example}")
         lines.append("")
         lines.append("---")
         lines.append("")
 
-    lines.append("## Quick comparison")
-    lines.append("")
-    lines.append("| Expression | Meaning | Politeness | Typical use |")
-    lines.append("|------------|---------|------------|-------------|")
-    for expr, meaning, politeness, use_case in comparison_rows:
-        lines.append(f"| **{expr}** | {meaning} | {politeness} | {use_case} |")
+    lines.append("## Quick points")
+    for point in quick_points:
+        lines.append(f"- {point}")
 
-    lines += ["", "---", "", "## Typical mistakes learners make", ""]
-    for wrong, correct in mistakes:
-        lines.append(f"✗ *{wrong}*")
-        lines.append(f"✓ *{correct}*")
-        lines.append("")
-
-    lines += ["---", "", "## How to practice in Falowen", ""]
-    for item in practice_items:
+    lines += ["", "---", "", "## How you can help today"]
+    for item in action_items:
         lines.append(f"- {item}")
 
-    lines += ["", "---", "", "## Final thoughts"]
+    lines += ["", "---", "", "## Final note"]
     lines.extend(final_lines)
-    lines += ["", "👉 Practice now at **falowen.app**"]
+    lines += ["", "👉 Donate • Volunteer • Partner with **Wesoamo Child Cancer Foundation**"]
     return "\n".join(lines)
 
 
-def a1_vocab_body() -> str:
+def awareness_body() -> str:
     return build_structured_body(
-        intro_heading="Why daily vocabulary matters",
+        intro_heading="Why childhood cancer awareness matters",
         intro_lines=[
-            "When beginners learn isolated words, they forget quickly.",
-            "When you learn words with **context + mini actions**, they stay in memory and become usable in speaking.",
+            "Early recognition can reduce delays in treatment and improve outcomes.",
+            "Communities, schools, and faith groups all play a role in sharing life-saving information.",
         ],
         sections=[
             {
-                "title": "Alltag nouns and verbs",
-                "explanation": ["These words help you describe a full day with simple A1 sentence patterns."],
+                "title": "Know common warning signs",
+                "explanation": ["Persistent symptoms should be checked by a health professional as early as possible."],
                 "examples": [
-                    "Ich frühstücke um 7 Uhr.",
-                    "Ich arbeite von Montag bis Freitag.",
-                    "Am Abend koche ich Nudeln.",
+                    "Unexplained weight loss or prolonged fever",
+                    "Frequent unexplained bruising or bleeding",
+                    "Persistent headaches, vomiting, or unusual swelling",
                 ],
-                "tone": "neutral, daily conversation",
-                "usage": "describing routines at school, work, and home",
             },
             {
-                "title": "Time connectors for routine",
-                "explanation": ["Use small connectors to sound natural, even with short sentences."],
+                "title": "Act quickly and seek care",
+                "explanation": ["Timely referral to a hospital can make a major difference for the child and family."],
                 "examples": [
-                    "Zuerst frühstücke ich, dann gehe ich zur Arbeit.",
-                    "Am Abend lerne ich Deutsch und schlafe um 22 Uhr.",
+                    "Encourage parents to visit qualified health facilities",
+                    "Help families access referral information and transport options",
                 ],
-                "tone": "simple and clear",
-                "usage": "building mini paragraphs, not just single lines",
             },
         ],
-        comparison_rows=[
-            ("frühstücken", "to have breakfast", "neutral", "morning routine"),
-            ("arbeiten", "to work", "neutral", "work/school life"),
-            ("spazieren gehen", "to go for a walk", "friendly", "free-time talk"),
+        quick_points=[
+            "Awareness can reduce late diagnosis.",
+            "Simple community education saves time and stress for families.",
+            "Trusted local voices help break myths and fear.",
         ],
-        mistakes=[
-            ("Ich lernen jeden Tag Deutsch.", "Ich lerne jeden Tag Deutsch."),
-            ("Ich gehe einkaufen im Supermarkt.", "Ich kaufe im Supermarkt ein."),
-        ],
-        practice_items=[
-            "Topic Coach: Describe your day in 6 lines using at least 5 routine verbs.",
-            "Sentence Trainer: Alternate present tense subjects (ich / wir / sie).",
-            "Writing Trainer: Write a mini diary entry for one weekday.",
+        action_items=[
+            "Share one verified awareness message this week.",
+            "Invite a health professional for a short community talk.",
+            "Support outreach campaigns in schools and churches/mosques.",
         ],
         final_lines=[
-            "Small A1 words become powerful when you reuse them in meaningful routines.",
-            "Practice this weekly and your fluency grows faster than memorizing random lists.",
+            "When we spread accurate information, families can seek help earlier.",
+            "Awareness is one of the most powerful forms of support we can offer.",
         ],
     )
 
 
-def a2_connectors_body() -> str:
+def support_body() -> str:
     return build_structured_body(
-        intro_heading="Why connectors change your writing quality",
+        intro_heading="Supporting treatment journeys with dignity",
         intro_lines=[
-            "A2 learners often know grammar but still write short, disconnected sentences.",
-            "Connectors create **flow**, show **logic**, and help you score higher in letters and short essays.",
+            "Families facing childhood cancer often carry medical, emotional, and financial burdens at once.",
+            "Practical support can ease pressure and help children stay on treatment.",
         ],
         sections=[
             {
-                "title": "Cause and effect connectors",
-                "explanation": ["Use these to explain reasons and consequences clearly."],
+                "title": "Welfare and emergency support",
+                "explanation": ["Small interventions can prevent interruptions in treatment and reduce distress."],
                 "examples": [
-                    "Ich bleibe zu Hause, weil ich müde bin.",
-                    "Ich war krank, deshalb bin ich nicht gekommen.",
-                    "Es regnet, trotzdem gehe ich spazieren.",
+                    "Transport support for hospital visits",
+                    "Essential supplies for children in treatment",
+                    "Emergency relief for urgent family needs",
                 ],
-                "tone": "structured, explanatory",
-                "usage": "emails, excuses, and planning messages",
             },
             {
-                "title": "Sequence and contrast connectors",
-                "explanation": ["These make your text feel organized and balanced."],
+                "title": "Parent counselling and emotional care",
+                "explanation": ["Parents need safe spaces to process difficult diagnoses and care decisions."],
                 "examples": [
-                    "Zuerst lerne ich Vokabeln, dann übe ich Schreiben.",
-                    "Ich möchte kommen, aber ich habe keine Zeit.",
-                    "Ich lerne nicht nur Wörter, sondern auch Grammatik.",
+                    "Counselling check-ins during treatment",
+                    "Guidance and referrals where needed",
                 ],
-                "tone": "clear and coherent",
-                "usage": "exam tasks, invitations, and short opinions",
             },
         ],
-        comparison_rows=[
-            ("weil", "because", "neutral", "giving reasons"),
-            ("deshalb", "therefore", "neutral", "showing result"),
-            ("trotzdem", "nevertheless", "slightly advanced", "contrast"),
+        quick_points=[
+            "Compassion and privacy are central to our work.",
+            "Family wellbeing influences treatment consistency.",
+            "Long-term follow-up supports recovery and reintegration.",
         ],
-        mistakes=[
-            ("Ich lerne jeden Tag. Deshalb ich mache Fortschritte.", "Ich lerne jeden Tag. Deshalb mache ich Fortschritte."),
-            ("Ich bleibe zu Hause, deshalb ich bin müde.", "Ich bleibe zu Hause, weil ich müde bin."),
-        ],
-        practice_items=[
-            "Topic Coach: Explain one problem and one solution using weil/deshalb/trotzdem.",
-            "Sentence Trainer: Combine two short lines into one logical sentence.",
-            "Writing Trainer: Write an A2 letter with at least six connectors.",
+        action_items=[
+            "Donate toward welfare and treatment support.",
+            "Volunteer skills for outreach, counselling support, or logistics.",
+            "Partner with us on hospital child welfare projects.",
         ],
         final_lines=[
-            "Connectors are the bridge between grammar knowledge and natural communication.",
-            "If your text has logic and flow, your German immediately sounds more mature.",
+            "No parent should walk this journey alone.",
+            "Together, we can provide hope, dignity, and practical support.",
         ],
     )
 
-
-def b1_opinion_body() -> str:
-    return build_structured_body(
-        intro_heading="Why B1 opinions need structure",
-        intro_lines=[
-            "At B1 level, the goal is not only to give an opinion but to support it clearly.",
-            "With the right phrases, your writing sounds balanced, thoughtful, and exam-ready.",
-        ],
-        sections=[
-            {
-                "title": "Core opinion starters",
-                "explanation": ["These phrases make your stance clear from the beginning."],
-                "examples": [
-                    "Meiner Meinung nach ist Online-Lernen sehr praktisch.",
-                    "Ich bin der Ansicht, dass tägliche Übung wichtig ist.",
-                ],
-                "tone": "balanced and clear",
-                "usage": "introductions and opening argument",
-            },
-            {
-                "title": "Balancing arguments and conclusions",
-                "explanation": ["Use contrast and conclusion phrases to show mature reasoning."],
-                "examples": [
-                    "Einerseits spart man Zeit, andererseits fehlt der Kontakt.",
-                    "Zum Schluss möchte ich sagen, dass Disziplin entscheidend ist.",
-                ],
-                "tone": "reasoned and organized",
-                "usage": "middle and final paragraph",
-            },
-        ],
-        comparison_rows=[
-            ("Meiner Meinung nach", "in my opinion", "neutral polite", "opening view"),
-            ("Einerseits … andererseits", "on one hand … on the other", "formal", "balanced argument"),
-            ("Zum Schluss", "in conclusion", "neutral", "closing statement"),
-        ],
-        mistakes=[
-            ("Ich finde das gut. Und ich finde das schlecht.", "Einerseits ist es praktisch, andererseits gibt es Nachteile."),
-            ("Ich denke, dass. Es ist wichtig.", "Ich denke, dass tägliche Übung wichtig ist."),
-        ],
-        practice_items=[
-            "Topic Coach: Defend and challenge one idea in the same response.",
-            "Sentence Trainer: Rewrite direct opinions into nuanced opinions.",
-            "Writing Trainer: Write 120–150 words with intro, contrast, and conclusion.",
-        ],
-        final_lines=[
-            "Strong B1 writing is a combination of opinion + support + structure.",
-            "When your argument is balanced, your voice sounds confident and credible.",
-        ],
-    )
-
-
-def b2_discussion_body() -> str:
-    return build_structured_body(
-        intro_heading="Why B2 discussion writing requires precision",
-        intro_lines=[
-            "At B2 level, ideas must be nuanced, not just correct.",
-            "You need structured arguments, clear transitions, and evidence-based claims.",
-        ],
-        sections=[
-            {
-                "title": "Framing a modern debate",
-                "explanation": ["Use debate framing to show analytical thinking from the first paragraph."],
-                "examples": [
-                    "Es lässt sich feststellen, dass KI Lernprozesse deutlich beschleunigen kann.",
-                    "Nicht zu unterschätzen ist, dass Datenschutzrisiken weiterhin bestehen.",
-                ],
-                "tone": "analytical",
-                "usage": "introduction and thesis framing",
-            },
-            {
-                "title": "Balancing advantages and risks",
-                "explanation": ["High-scoring B2 texts compare sides before concluding."],
-                "examples": [
-                    "Demgegenüber steht jedoch, dass automatisierte Inhalte nicht immer zuverlässig sind.",
-                    "Zusammenfassend kann man sagen, dass KI sinnvoll ist, wenn klare Regeln gelten.",
-                ],
-                "tone": "formal and nuanced",
-                "usage": "argument body and final evaluation",
-            },
-        ],
-        comparison_rows=[
-            ("Es lässt sich feststellen, dass", "it can be observed that", "formal", "objective claim"),
-            ("Demgegenüber steht jedoch, dass", "in contrast, however", "formal", "counter-argument"),
-            ("Zusammenfassend kann man sagen, dass", "to summarize", "formal", "conclusion"),
-        ],
-        mistakes=[
-            ("KI ist gut. KI ist schlecht.", "KI bietet Effizienzvorteile, birgt jedoch erhebliche Datenschutzrisiken."),
-            ("Ich finde, dass KI ist gut.", "Ich bin der Ansicht, dass KI in klaren Grenzen sinnvoll ist."),
-        ],
-        practice_items=[
-            "Topic Coach: Defend one policy and challenge it with one risk.",
-            "Sentence Trainer: Turn simple opinions into formal B2 structures.",
-            "Writing Trainer: Write 180–220 words with at least four advanced connectors.",
-        ],
-        final_lines=[
-            "Excellent B2 texts show control of language and control of argument logic.",
-            "Train with realistic prompts and your written German will sound truly advanced.",
-        ],
-    )
-
-
-# ---------- Rotation Logic ----------
 
 def week_index_utc() -> int:
     return date.today().isocalendar().week
 
+
 def get_topic_for_week(week_index: int) -> dict:
     topics = [
         {
-            "title": "A1: Daily Vocabulary with Examples and Mini Routines",
-            "excerpt": "A1 vocabulary with context, common mistakes, and practical routines for daily speaking.",
-            "category": "Guides",
-            "tags": ["falowen", "german", "a1", "vocabulary", "daily routines"],
-            "image": "https://raw.githubusercontent.com/learngermanghana/falowen-blog/main/photos/pexels-polina-kovaleva-8362564.jpg",
-            "image_alt": "Student writing a German daily routine plan at a study desk",
-            "seo_title": "A1 German Daily Vocabulary Guide – Examples and Mini Routines",
-            "seo_description": "Learn useful A1 German vocabulary for daily routines with examples, mistakes to avoid, and Falowen practice tasks.",
-            "permalink_slug": "a1-daily-vocabulary-guide",
-            "body": a1_vocab_body(),
+            "title": "Early Signs of Childhood Cancer Every Parent Should Know",
+            "excerpt": "A practical guide to warning signs and why early hospital care matters.",
+            "category": "Awareness",
+            "tags": ["childhood cancer", "awareness", "ghana", "parents"],
+            "image": "https://images.pexels.com/photos/6753163/pexels-photo-6753163.jpeg",
+            "image_alt": "Doctor speaking with parent and child in a clinic",
+            "seo_title": "Early Signs of Childhood Cancer: Parent Awareness Guide",
+            "seo_description": "Learn key warning signs of childhood cancer and how early action can support better outcomes for children.",
+            "permalink_slug": "early-signs-of-childhood-cancer-parents-guide",
+            "body": awareness_body(),
         },
         {
-            "title": "A2: Use Connectors Correctly to Write with Better Logic",
-            "excerpt": "Learn A2 connectors with deeper examples, common errors, and practical writing drills.",
-            "category": "Guides",
-            "tags": ["falowen", "german", "a2", "writing", "connectors"],
-            "image": "https://raw.githubusercontent.com/learngermanghana/falowen-blog/main/photos/pexels-joshuamckn-1139317.jpg",
-            "image_alt": "German learner reviewing connector notes for A2 writing",
-            "seo_title": "A2 German Connectors Guide – Write with Better Flow",
-            "seo_description": "Master A2 connectors like weil, deshalb, trotzdem, and aber with examples, mistakes, and practice ideas.",
-            "permalink_slug": "a2-german-connectors-writing-guide",
-            "body": a2_connectors_body(),
+            "title": "Hope, Dignity, and Support for Children Fighting Cancer",
+            "excerpt": "How compassionate welfare support helps children and families through treatment.",
+            "category": "Support",
+            "tags": ["childhood cancer", "support", "welfare", "ghana"],
+            "image": "https://images.pexels.com/photos/7551674/pexels-photo-7551674.jpeg",
+            "image_alt": "Caregiver comforting a child",
+            "seo_title": "Hope and Dignity for Children Fighting Cancer in Ghana",
+            "seo_description": "See how welfare and emotional support can reduce burden for children in treatment and their families.",
+            "permalink_slug": "hope-dignity-support-for-children-fighting-cancer",
+            "body": support_body(),
         },
         {
-            "title": "B1: Express Opinions with Structure – Phrases, Examples, Mistakes",
-            "excerpt": "B1 opinion-writing guide with phrases, argument structure, and exam-focused practice.",
-            "category": "Guides",
-            "tags": ["falowen", "german", "b1", "writing", "opinion"],
-            "image": "https://raw.githubusercontent.com/learngermanghana/falowen-blog/main/photos/pexels-rdne-8499492.jpg",
-            "image_alt": "Learner drafting a structured B1 German opinion text",
-            "seo_title": "B1 German Opinion Writing – Structure and Useful Phrases",
-            "seo_description": "Improve B1 German writing with opinion starters, contrast phrases, common mistakes, and practical drills.",
-            "permalink_slug": "b1-opinion-writing-structure-guide",
-            "body": b1_opinion_body(),
+            "title": "Why Childhood Cancer Awareness Campaigns Save Lives",
+            "excerpt": "Community awareness helps families recognize symptoms early and seek care quickly.",
+            "category": "Awareness",
+            "tags": ["awareness", "community", "childhood cancer", "ghana"],
+            "image": "https://images.pexels.com/photos/6646917/pexels-photo-6646917.jpeg",
+            "image_alt": "Community health education session",
+            "seo_title": "Childhood Cancer Awareness Campaigns in Ghana",
+            "seo_description": "Understand why community campaigns are critical for early detection and timely hospital referral.",
+            "permalink_slug": "childhood-cancer-awareness-campaigns-save-lives",
+            "body": awareness_body(),
         },
         {
-            "title": "B2: Write Discussions About AI with Precise Arguments",
-            "excerpt": "B2 discussion-writing blueprint with advanced structures, balanced arguments, and exam practice.",
-            "category": "Guides",
-            "tags": ["falowen", "german", "b2", "discussion", "exam writing"],
-            "image": "https://raw.githubusercontent.com/learngermanghana/falowen-blog/main/photos/pexels-prince-beguin-81839921-10334158.jpg",
-            "image_alt": "Student and laptop symbolizing advanced B2 discussion writing on AI",
-            "seo_title": "B2 German Discussion Writing – AI Topic Structure Guide",
-            "seo_description": "Write stronger B2 discussion texts with formal phrases, comparison logic, and practical Falowen exercises.",
-            "permalink_slug": "b2-discussion-writing-ai-guide",
-            "body": b2_discussion_body(),
+            "title": "Financial and Welfare Support: What Families Need Most",
+            "excerpt": "A look at practical needs families face during childhood cancer treatment.",
+            "category": "Support",
+            "tags": ["financial support", "welfare", "families", "childhood cancer"],
+            "image": "https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg",
+            "image_alt": "Parent and child holding hands in hospital",
+            "seo_title": "Financial and Welfare Support for Childhood Cancer Families",
+            "seo_description": "Explore priority welfare and financial needs for families caring for children undergoing cancer treatment.",
+            "permalink_slug": "financial-welfare-support-for-families",
+            "body": support_body(),
+        },
+        {
+            "title": "Standing with Parents Through Difficult Diagnoses",
+            "excerpt": "Why counselling and emotional support matter for parents and caregivers.",
+            "category": "Counselling",
+            "tags": ["counselling", "parents", "emotional support", "ghana"],
+            "image": "https://images.pexels.com/photos/7176305/pexels-photo-7176305.jpeg",
+            "image_alt": "Counsellor supporting a parent",
+            "seo_title": "Parent Counselling and Emotional Support in Childhood Cancer",
+            "seo_description": "Learn how counselling support helps parents cope, make decisions, and sustain care for their children.",
+            "permalink_slug": "standing-with-parents-through-difficult-diagnoses",
+            "body": support_body(),
+        },
+        {
+            "title": "Survivor Follow-Up: Life After Childhood Cancer Treatment",
+            "excerpt": "Follow-up support helps survivors heal, grow in confidence, and reintegrate.",
+            "category": "Survivorship",
+            "tags": ["survivor follow-up", "childhood cancer", "reintegration", "ghana"],
+            "image": "https://images.pexels.com/photos/3768166/pexels-photo-3768166.jpeg",
+            "image_alt": "Young survivor smiling outdoors",
+            "seo_title": "Survivor Follow-Up Support After Childhood Cancer",
+            "seo_description": "Discover why survivor follow-up is essential for emotional wellbeing, confidence, and reintegration.",
+            "permalink_slug": "survivor-follow-up-after-childhood-cancer-treatment",
+            "body": support_body(),
+        },
+        {
+            "title": "Hospital Child Welfare Projects That Bring Comfort",
+            "excerpt": "How child-focused hospital projects improve dignity and comfort during treatment.",
+            "category": "Projects",
+            "tags": ["hospital projects", "child welfare", "support", "ghana"],
+            "image": "https://images.pexels.com/photos/1257110/pexels-photo-1257110.jpeg",
+            "image_alt": "Colorful child-friendly hospital room",
+            "seo_title": "Hospital Child Welfare Projects for Children in Treatment",
+            "seo_description": "See how child welfare projects in hospitals can provide comfort and dignity to young patients.",
+            "permalink_slug": "hospital-child-welfare-projects-bring-comfort",
+            "body": support_body(),
+        },
+        {
+            "title": "How Volunteers Can Make a Difference for Families",
+            "excerpt": "Simple volunteer actions can reduce stress and strengthen family support systems.",
+            "category": "Get Involved",
+            "tags": ["volunteer", "community", "family support", "childhood cancer"],
+            "image": "https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg",
+            "image_alt": "Volunteers engaging with families",
+            "seo_title": "Volunteer Support for Childhood Cancer Families",
+            "seo_description": "Learn practical ways volunteers can support children in treatment and their families in Ghana.",
+            "permalink_slug": "how-volunteers-can-make-a-difference",
+            "body": support_body(),
+        },
+        {
+            "title": "Community Partnerships for Better Childhood Cancer Care",
+            "excerpt": "Partnerships with communities and institutions expand support for children and parents.",
+            "category": "Partnerships",
+            "tags": ["partnership", "community", "awareness", "support"],
+            "image": "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg",
+            "image_alt": "Group partnership meeting",
+            "seo_title": "Community Partnerships for Childhood Cancer Support",
+            "seo_description": "Strong partnerships help scale awareness, welfare support, and counselling for families.",
+            "permalink_slug": "community-partnerships-for-better-childhood-cancer-care",
+            "body": awareness_body(),
+        },
+        {
+            "title": "Transparent Giving: How Donations Support Real Needs",
+            "excerpt": "Transparency builds trust and ensures support reaches children and families effectively.",
+            "category": "Donate",
+            "tags": ["donate", "transparency", "welfare", "charity"],
+            "image": "https://images.pexels.com/photos/6647037/pexels-photo-6647037.jpeg",
+            "image_alt": "Hands giving donation envelope",
+            "seo_title": "Transparent Giving for Childhood Cancer Support",
+            "seo_description": "Understand how transparent charitable giving can support practical needs for children in treatment.",
+            "permalink_slug": "transparent-giving-how-donations-support-real-needs",
+            "body": support_body(),
         },
     ]
+
     idx = (week_index - 1) % len(topics)
     return topics[idx]
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate one weekly blog post in _posts/.")
-    parser.add_argument(
-        "--date",
-        help="Publishing date in YYYY-MM-DD format (default: current UTC date).",
-    )
+    parser.add_argument("--date", help="Publishing date in YYYY-MM-DD format (default: current UTC date).")
     parser.add_argument(
         "--week-index",
         type=int,
         help="ISO week index override for topic rotation (default: current ISO week).",
     )
-    parser.add_argument(
-        "--force",
-        action="store_true",
-        help="Create a file even if one with the same name already exists.",
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Print planned filename/topic and exit without writing files.",
-    )
+    parser.add_argument("--force", action="store_true", help="Create a file even if one with the same name already exists.")
+    parser.add_argument("--dry-run", action="store_true", help="Print planned filename/topic and exit without writing files.")
     return parser.parse_args()
 
 
@@ -407,7 +325,6 @@ def resolve_publish_date(raw_date: str | None) -> str:
     if raw_date is None:
         return datetime.utcnow().strftime("%Y-%m-%d")
 
-    # Validate strict YYYY-MM-DD input.
     datetime.strptime(raw_date, "%Y-%m-%d")
     return raw_date
 
@@ -419,6 +336,7 @@ def post_already_contains_title(title: str) -> bool:
         if title_pattern.search(post_file.read_text(encoding="utf-8")):
             return True
     return False
+
 
 def main() -> int:
     args = parse_args()
@@ -438,7 +356,6 @@ def main() -> int:
         print(f"[dry-run] Target file: {path}")
         return 0
 
-    # If rerun same day (or same topic), do nothing.
     if path.exists() and not args.force:
         print(f"Post already exists: {path}")
         return 0
