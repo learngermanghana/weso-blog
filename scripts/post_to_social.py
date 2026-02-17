@@ -148,7 +148,7 @@ def publish_instagram(caption: str, article_url: str, image_url: str | None, dry
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Publish a blog post to social channels.")
     parser.add_argument("--post", required=True, help="Path to post markdown file in _posts/.")
-    parser.add_argument("--site-url", default=os.getenv("SITE_URL", "https://falowen.com"))
+    parser.add_argument("--site-url", default=os.getenv("SITE_URL", "https://www.wesoamochildcancer.com"))
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()
 

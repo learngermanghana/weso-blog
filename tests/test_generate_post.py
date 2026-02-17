@@ -9,7 +9,7 @@ class BuildPostTests(unittest.TestCase):
             title="Test title",
             excerpt="Test excerpt",
             category="Guides",
-            tags=["falowen", "german"],
+            tags=["childhood-cancer", "awareness"],
             image_url="https://example.com/image.jpg",
             image_alt="alt text",
             permalink_slug="test-title",
