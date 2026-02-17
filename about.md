@@ -10,7 +10,12 @@ Wesoamo Child Cancer Foundation is a charity blog dedicated to **hope, dignity, 
 
 We create awareness on childhood cancer and provide **financial, welfare, counselling, and follow-up support** for children battling cancer and their families in Ghana.
 
+
 ---
+
+## Watch our videos
+
+{% include youtube-gallery.html title="Stories in motion" limit=1 compact=true show_link=true %}
 
 ## Contact & Support
 
