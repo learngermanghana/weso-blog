@@ -1,40 +1,77 @@
-{% if page.excerpt %}
-<meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}">
-{% elsif site.description %}
-<meta name="description" content="{{ site.description | escape }}">
-{% endif %}
+{% assign meta_title = page.title | default: site.title %}
+{% assign meta_description = page.excerpt | default: page.description | default: site.description %}
+{% assign clean_description = meta_description | strip_html | strip_newlines | truncate: 160 | escape %}
+{% assign meta_image = page.image | default: site.logo %}
 
-{% if page.robots %}
-<meta name="robots" content="{{ page.robots }}">
-{% endif %}
-
+<meta name="description" content="{{ clean_description }}">
+<meta name="robots" content="{{ page.robots | default: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
 <link rel="icon" href="https://i.imgur.com/mcrrGfd.png" />
 
-<link
-  rel="feed"
-  type="application/rss+xml"
-  title="{{ site.title }}"
-  href="{{ '/feed.xml' | absolute_url }}"
->
+<link rel="feed" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | absolute_url }}">
 
-<meta property="og:title" content="{{ page.title | default: site.title | escape }}">
-<meta property="og:description" content="{{ page.excerpt | strip_html | strip_newlines | truncate: 160 | default: site.description | escape }}">
+<meta property="og:title" content="{{ meta_title | escape }}">
+<meta property="og:description" content="{{ clean_description }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
 <meta property="og:site_name" content="{{ site.title | escape }}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
 <meta property="og:locale" content="{{ site.locale | default: 'en_US' }}">
-{% if site.alternates %}
-  {% for alternate in site.alternates %}
-    {% if alternate.locale and alternate.locale != site.locale %}
-<meta property="og:locale:alternate" content="{{ alternate.locale }}">
-    {% endif %}
-  {% endfor %}
-{% endif %}
+<meta property="og:image" content="{{ meta_image | absolute_url }}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta_title | escape }}">
+<meta name="twitter:description" content="{{ clean_description }}">
+<meta name="twitter:image" content="{{ meta_image | absolute_url }}">
 
 {% if site.alternates %}
   {% for alternate in site.alternates %}
 <link rel="alternate" hreflang="{{ alternate.lang }}" href="{{ alternate.url }}">
   {% endfor %}
+{% endif %}
+<link rel="alternate" hreflang="x-default" href="{{ site.url }}/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ site.title | escape }}",
+  "url": "https://www.wesoamochildcancer.com/",
+  "logo": "{{ site.logo | absolute_url }}",
+  "sameAs": [
+    "https://www.wesoamochildcancer.com/",
+    "{{ site.url }}/"
+  ]
+}
+</script>
+
+{% if page.layout == 'post' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title | escape }}",
+  "description": "{{ clean_description }}",
+  "image": "{{ meta_image | absolute_url }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "{{ site.title | escape }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title | escape }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.logo | absolute_url }}"
+    }
+  },
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}"
+}
+</script>
 {% endif %}
 
 {% if site.google_analytics %}

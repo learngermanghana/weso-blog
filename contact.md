@@ -4,21 +4,15 @@ title: Contact Us
 permalink: /contact/
 ---
 
-# Contact Us
+# Contact Wesoamo Child Cancer Foundation
 
-We're here to help with course registrations, class details, and general inquiries.
+We are here to support children battling cancer and their families.
 
-- **Email:** [learngermanghana@gmail.com](mailto:learngermanghana@gmail.com)
-- **Phone:** [0205706589](tel:+233205706589)
-- **Mailing Address:** P.O. Box 2624, Kaneshie
+- **Main Website:** [www.wesoamochildcancer.com](https://www.wesoamochildcancer.com/)
+- **Blog:** [blog.wesoamochildcancer.app](https://blog.wesoamochildcancer.app/)
+- **Call / WhatsApp:** [0555945515](https://wa.me/233555945515)
 
-## Hours of Operation
-- **Monday:** 8:30 am – 4:00 pm
-- **Tuesday:** 8:30 am – 4:00 pm
-- **Wednesday:** 8:30 am – 4:00 pm
-- **Thursday:** 8:30 am – 4:00 pm
-- **Friday:** 8:30 am – 4:00 pm
-- **Saturday:** Closed
-- **Sunday:** Closed
-
-Looking for the next start date? Visit the [Upcoming Classes]({{ '/upcoming-classes/' | relative_url }}) page.
+## Get Involved
+- **Donate**
+- **Volunteer**
+- **Partner**

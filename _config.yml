@@ -1,10 +1,18 @@
-title: "Falowen Blog"
-description: "Insights and resources from Learn Language Education Academy"
+title: "Wesoamo Child Cancer Foundation"
+description: "A charity blog focused on hope, dignity, and support for children fighting cancer"
 lang: en
 locale: en_US
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://blog.falowen.app" # your custom domain
+url: "https://blog.wesoamochildcancer.app" # your custom domain
 theme: minima
+logo: "https://blog.wesoamochildcancer.app/photos/A1%20November(1).png"
+author:
+  name: "Wesoamo Child Cancer Foundation"
+social:
+  name: "Wesoamo Child Cancer Foundation"
+  links:
+    - "https://www.wesoamochildcancer.com/"
+    - "https://blog.wesoamochildcancer.app/"
 header_pages:
   - about.md
   - search.md
@@ -14,16 +22,16 @@ plugins:
   - jekyll-sitemap # generate sitemap.xml
   - jekyll-paginate-v2
 future: true
-# twitter_username: falowen
-github_username: falowen
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: "https://blog.wesoamochildcancer.app/photos/A1%20November(1).png"
 
 alternates:
   - lang: en
     locale: en_US
-    url: "https://blog.falowen.app/"
-  - lang: fr
-    locale: fr_FR
-    url: "https://blog.falowen.app/fr/"
+    url: "https://blog.wesoamochildcancer.app/"
 
 giscus:
   enabled: false
