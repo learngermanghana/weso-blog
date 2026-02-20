@@ -10,6 +10,7 @@ We are here to support children battling cancer and their families.
 
 - **Main Website:** [www.wesoamochildcancer.com](https://www.wesoamochildcancer.com/)
 - **Blog:** [blog.wesoamochildcancer.app](https://blog.wesoamochildcancer.app/)
+- **Email:** [wesoamochildcancerfoundation@gmail.com](mailto:wesoamochildcancerfoundation@gmail.com)
 - **Call / WhatsApp:** [0555945515](https://wa.me/233555945515)
 
 ## Get Involved
