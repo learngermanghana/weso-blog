@@ -22,7 +22,8 @@ We create awareness on childhood cancer and provide **financial, welfare, counse
 - **Donate**
 - **Volunteer**
 - **Call / WhatsApp:** [0555945515](https://wa.me/233555945515)
-- **Email:** [wesoamochildcancerfoundation@gmail.com](mailto:wesoamochildcancerfoundation@gmail.com)
+- **Email:** [info@wesoamochildcancer.com](mailto:info@wesoamochildcancer.com)
+- **Map Location:** [Find us on Google Maps](https://maps.app.goo.gl/1ksPWUgzUUBudWLt5)
 
 ---
 
